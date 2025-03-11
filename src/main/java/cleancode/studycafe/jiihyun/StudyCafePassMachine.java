@@ -1,5 +1,6 @@
 package cleancode.studycafe.jiihyun;
 
+import cleancode.studycafe.jiihyun.config.StudyCafeConfig;
 import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.io.InputHandler;
 import cleancode.studycafe.jiihyun.io.OutputHandler;
@@ -12,8 +13,13 @@ import java.util.List;
 
 public class StudyCafePassMachine {
 
-    private final InputHandler inputHandler = new InputHandler();
-    private final OutputHandler outputHandler = new OutputHandler();
+    private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
+
+    public StudyCafePassMachine(final StudyCafeConfig studyCafeConfig) {
+        this.inputHandler = studyCafeConfig.getInputHandler();
+        this.outputHandler = studyCafeConfig.getOutputHandler();
+    }
 
     public void run() {
         try {
@@ -27,8 +33,8 @@ public class StudyCafePassMachine {
                 StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
                 List<StudyCafePass> studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
                 List<StudyCafePass> hourlyPasses = studyCafePasses.stream()
-                    .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.HOURLY)
-                    .toList();
+                        .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.HOURLY)
+                        .toList();
                 outputHandler.showPassListForSelection(hourlyPasses);
                 StudyCafePass selectedPass = inputHandler.getSelectPass(hourlyPasses);
                 outputHandler.showPassOrderSummary(selectedPass, null);
@@ -36,8 +42,8 @@ public class StudyCafePassMachine {
                 StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
                 List<StudyCafePass> studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
                 List<StudyCafePass> weeklyPasses = studyCafePasses.stream()
-                    .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.WEEKLY)
-                    .toList();
+                        .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.WEEKLY)
+                        .toList();
                 outputHandler.showPassListForSelection(weeklyPasses);
                 StudyCafePass selectedPass = inputHandler.getSelectPass(weeklyPasses);
                 outputHandler.showPassOrderSummary(selectedPass, null);
@@ -45,19 +51,19 @@ public class StudyCafePassMachine {
                 StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
                 List<StudyCafePass> studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
                 List<StudyCafePass> fixedPasses = studyCafePasses.stream()
-                    .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.FIXED)
-                    .toList();
+                        .filter(studyCafePass -> studyCafePass.getPassType() == StudyCafePassType.FIXED)
+                        .toList();
                 outputHandler.showPassListForSelection(fixedPasses);
                 StudyCafePass selectedPass = inputHandler.getSelectPass(fixedPasses);
 
                 List<StudyCafeLockerPass> lockerPasses = studyCafeFileHandler.readLockerPasses();
                 StudyCafeLockerPass lockerPass = lockerPasses.stream()
-                    .filter(option ->
-                        option.getPassType() == selectedPass.getPassType()
-                            && option.getDuration() == selectedPass.getDuration()
-                    )
-                    .findFirst()
-                    .orElse(null);
+                        .filter(option ->
+                                option.getPassType() == selectedPass.getPassType()
+                                        && option.getDuration() == selectedPass.getDuration()
+                        )
+                        .findFirst()
+                        .orElse(null);
 
                 boolean lockerSelection = false;
                 if (lockerPass != null) {
