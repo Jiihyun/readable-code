@@ -1,5 +1,6 @@
 package cleancode.studycafe.jiihyun.io;
 
+import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
 import cleancode.studycafe.jiihyun.model.StudyCafePass;
 
@@ -72,4 +73,8 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println(message);
     }
 
+    @Override
+    public void showExceptionMessage(AppException exception) {
+        System.out.println(exception.getMessage());
+    }
 }

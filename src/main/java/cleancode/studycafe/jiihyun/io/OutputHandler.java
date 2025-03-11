@@ -1,5 +1,6 @@
 package cleancode.studycafe.jiihyun.io;
 
+import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
 import cleancode.studycafe.jiihyun.model.StudyCafePass;
 
@@ -20,5 +21,7 @@ public interface OutputHandler {
     void showPassOrderSummary(StudyCafePass selectedPass, StudyCafeLockerPass lockerPass);
 
     void showSimpleMessage(String message);
+
+    void showExceptionMessage(AppException exception);
 
 }
