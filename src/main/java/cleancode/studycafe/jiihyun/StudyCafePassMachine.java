@@ -30,18 +30,7 @@ public class StudyCafePassMachine {
 
             outputHandler.askPassTypeSelection();
             StudyCafePassType studyCafePassType = inputHandler.getPassTypeSelectingUserAction();
-
-            StudyCafePasses studyCafePasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
-
-            if (doesUserChooseHourly(studyCafePassType)) {
-                act(studyCafePasses, StudyCafePassType.HOURLY);
-            }
-            if (doesUserChooseWeekly(studyCafePassType)) {
-                act(studyCafePasses, StudyCafePassType.WEEKLY);
-            }
-            if (doesUserChooseFixed(studyCafePassType)) {
-                act(studyCafePasses, StudyCafePassType.FIXED);
-            }
+            processUserSelection(studyCafePassType);
         } catch (AppException e) {
             outputHandler.showExceptionMessage(e);
         } catch (Exception e) {
@@ -49,7 +38,21 @@ public class StudyCafePassMachine {
         }
     }
 
-    private void act(final StudyCafePasses studyCafePasses, final StudyCafePassType studyCafePassType) {
+    private void processUserSelection(final StudyCafePassType studyCafePassType) {
+        StudyCafePasses studyCafePasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
+
+        if (doesUserChooseHourly(studyCafePassType)) {
+            applyPass(studyCafePasses, StudyCafePassType.HOURLY);
+        }
+        if (doesUserChooseWeekly(studyCafePassType)) {
+            applyPass(studyCafePasses, StudyCafePassType.WEEKLY);
+        }
+        if (doesUserChooseFixed(studyCafePassType)) {
+            applyPass(studyCafePasses, StudyCafePassType.FIXED);
+        }
+    }
+
+    private void applyPass(final StudyCafePasses studyCafePasses, final StudyCafePassType studyCafePassType) {
         StudyCafePasses passes = studyCafePasses.getStudyCafePassesByPassType(studyCafePassType);
         outputHandler.showPassListForSelection(passes);
         StudyCafePass selectedPass = inputHandler.getSelectPass(passes);
