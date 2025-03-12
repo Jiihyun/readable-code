@@ -3,6 +3,7 @@ package cleancode.studycafe.jiihyun.io;
 import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
 import cleancode.studycafe.jiihyun.model.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.StudyCafePasses;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface OutputHandler {
 
     void askPassTypeSelection();
 
-    void showPassListForSelection(List<StudyCafePass> passes);
+    void showPassListForSelection(StudyCafePasses passes);
 
     void askLockerPass(StudyCafeLockerPass lockerPass);
 

@@ -3,8 +3,7 @@ package cleancode.studycafe.jiihyun.io;
 import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
 import cleancode.studycafe.jiihyun.model.StudyCafePass;
-
-import java.util.List;
+import cleancode.studycafe.jiihyun.model.StudyCafePasses;
 
 public class ConsoleOutputHandler implements OutputHandler {
 
@@ -27,11 +26,11 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     @Override
-    public void showPassListForSelection(List<StudyCafePass> passes) {
+    public void showPassListForSelection(StudyCafePasses passes) {
         System.out.println();
         System.out.println("이용권 목록");
-        for (int index = 0; index < passes.size(); index++) {
-            StudyCafePass pass = passes.get(index);
+        for (int index = 0; index < passes.getSize(); index++) {
+            StudyCafePass pass = passes.getStudyCafePass(index);
             System.out.println(String.format("%s. ", index + 1) + pass.display());
         }
     }
