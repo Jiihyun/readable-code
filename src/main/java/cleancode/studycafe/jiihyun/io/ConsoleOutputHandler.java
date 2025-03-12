@@ -1,9 +1,9 @@
 package cleancode.studycafe.jiihyun.io;
 
 import cleancode.studycafe.jiihyun.exception.AppException;
-import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
-import cleancode.studycafe.jiihyun.model.StudyCafePass;
-import cleancode.studycafe.jiihyun.model.StudyCafePasses;
+import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePasses;
 
 public class ConsoleOutputHandler implements OutputHandler {
 

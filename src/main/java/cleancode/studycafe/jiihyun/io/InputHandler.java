@@ -1,10 +1,8 @@
 package cleancode.studycafe.jiihyun.io;
 
-import cleancode.studycafe.jiihyun.model.StudyCafePass;
-import cleancode.studycafe.jiihyun.model.StudyCafePassType;
-import cleancode.studycafe.jiihyun.model.StudyCafePasses;
-
-import java.util.List;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePassType;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePasses;
 
 public interface InputHandler {
 

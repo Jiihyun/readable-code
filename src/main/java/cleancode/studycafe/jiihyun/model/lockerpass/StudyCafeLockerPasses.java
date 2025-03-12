@@ -1,6 +1,7 @@
-package cleancode.studycafe.jiihyun.model;
+package cleancode.studycafe.jiihyun.model.lockerpass;
 
 import cleancode.studycafe.jiihyun.exception.AppException;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
 
 import java.util.List;
 

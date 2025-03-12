@@ -5,11 +5,11 @@ import cleancode.studycafe.jiihyun.exception.AppException;
 import cleancode.studycafe.jiihyun.io.InputHandler;
 import cleancode.studycafe.jiihyun.io.OutputHandler;
 import cleancode.studycafe.jiihyun.io.StudyCafeFileHandler;
-import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
-import cleancode.studycafe.jiihyun.model.StudyCafeLockerPasses;
-import cleancode.studycafe.jiihyun.model.StudyCafePass;
-import cleancode.studycafe.jiihyun.model.StudyCafePassType;
-import cleancode.studycafe.jiihyun.model.StudyCafePasses;
+import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPass;
+import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPasses;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePassType;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePasses;
 
 public class StudyCafePassMachine {
 

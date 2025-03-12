@@ -1,4 +1,4 @@
-package cleancode.studycafe.jiihyun.model;
+package cleancode.studycafe.jiihyun.model.studycafepass;
 
 import cleancode.studycafe.jiihyun.exception.AppException;
 

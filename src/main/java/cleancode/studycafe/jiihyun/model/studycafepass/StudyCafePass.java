@@ -1,24 +1,25 @@
-package cleancode.studycafe.jiihyun.model;
+package cleancode.studycafe.jiihyun.model.studycafepass;
 
-public class StudyCafeLockerPass {
+public class StudyCafePass {
 
     private final StudyCafePassType passType;
     private final int duration;
     private final int price;
+    private final double discountRate;
 
-    private StudyCafeLockerPass(StudyCafePassType passType, int duration, int price) {
+    private StudyCafePass(StudyCafePassType passType, int duration, int price, double discountRate) {
         this.passType = passType;
         this.duration = duration;
         this.price = price;
+        this.discountRate = discountRate;
     }
 
-    public static StudyCafeLockerPass of(StudyCafePassType passType, int duration, int price) {
-        return new StudyCafeLockerPass(passType, duration, price);
+    public static StudyCafePass of(StudyCafePassType passType, int duration, int price, double discountRate) {
+        return new StudyCafePass(passType, duration, price, discountRate);
     }
 
-    public boolean isSamePassTypeAndDuration(final StudyCafePass selectedPass) {
-        return passType == selectedPass.getPassType()
-                && duration == selectedPass.getDuration();
+    public boolean isSamePassTypeWith(final StudyCafePassType studyCafePassType) {
+        return passType == studyCafePassType;
     }
 
     public StudyCafePassType getPassType() {
@@ -31,6 +32,10 @@ public class StudyCafeLockerPass {
 
     public int getPrice() {
         return price;
+    }
+
+    public double getDiscountRate() {
+        return discountRate;
     }
 
     public String display() {

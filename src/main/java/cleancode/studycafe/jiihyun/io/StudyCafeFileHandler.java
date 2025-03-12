@@ -1,7 +1,7 @@
 package cleancode.studycafe.jiihyun.io;
 
-import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
-import cleancode.studycafe.jiihyun.model.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
 
 import java.io.IOException;
 import java.nio.file.Files;

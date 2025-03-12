@@ -1,8 +1,8 @@
 package cleancode.studycafe.jiihyun.io;
 
-import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
-import cleancode.studycafe.jiihyun.model.StudyCafePass;
-import cleancode.studycafe.jiihyun.model.StudyCafePassType;
+import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePassType;
 
 //Question: 도메인을 반환해도 될지?
 public class FileLineParser {
