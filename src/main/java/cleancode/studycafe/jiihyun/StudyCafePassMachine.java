@@ -6,11 +6,10 @@ import cleancode.studycafe.jiihyun.io.InputHandler;
 import cleancode.studycafe.jiihyun.io.OutputHandler;
 import cleancode.studycafe.jiihyun.io.StudyCafeFileHandler;
 import cleancode.studycafe.jiihyun.model.StudyCafeLockerPass;
+import cleancode.studycafe.jiihyun.model.StudyCafeLockerPasses;
 import cleancode.studycafe.jiihyun.model.StudyCafePass;
 import cleancode.studycafe.jiihyun.model.StudyCafePassType;
 import cleancode.studycafe.jiihyun.model.StudyCafePasses;
-
-import java.util.List;
 
 public class StudyCafePassMachine {
 
@@ -62,17 +61,11 @@ public class StudyCafePassMachine {
     }
 
     private void checkLockerPass(final StudyCafePass selectedPass) {
-        List<StudyCafeLockerPass> lockerPasses = studyCafeFileHandler.readLockerPasses();
-        StudyCafeLockerPass lockerPass = lockerPasses.stream()
-                .filter(option -> option.isSamePassTypeAndDuration(selectedPass))
-                .findFirst()
-                .orElse(null);
+        StudyCafeLockerPasses lockerPasses = new StudyCafeLockerPasses(studyCafeFileHandler.readLockerPasses());
+        StudyCafeLockerPass lockerPass = lockerPasses.getLockerPassByCafePassTypeAndDuration(selectedPass);
 
-        boolean lockerSelection = false;
-        if (lockerPass != null) {
-            outputHandler.askLockerPass(lockerPass);
-            lockerSelection = inputHandler.getLockerSelection();
-        }
+        outputHandler.askLockerPass(lockerPass);
+        boolean lockerSelection = inputHandler.getLockerSelection();
 
         if (lockerSelection) {
             outputHandler.showPassOrderSummary(selectedPass, lockerPass);
