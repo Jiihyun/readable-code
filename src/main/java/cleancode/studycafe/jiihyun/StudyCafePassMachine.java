@@ -8,6 +8,7 @@ import cleancode.studycafe.jiihyun.io.StudyCafeFileHandler;
 import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPass;
 import cleancode.studycafe.jiihyun.model.lockerpass.StudyCafeLockerPasses;
 import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePass;
+import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePassProcessor;
 import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePassType;
 import cleancode.studycafe.jiihyun.model.studycafepass.StudyCafePasses;
 
@@ -39,28 +40,21 @@ public class StudyCafePassMachine {
     }
 
     private void processUserSelection(final StudyCafePassType studyCafePassType) {
-        StudyCafePasses studyCafePasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
+        StudyCafePasses availablePasses = getAvailablePasses(studyCafePassType);
 
-        if (doesUserChooseHourly(studyCafePassType)) {
-            applyPass(studyCafePasses, StudyCafePassType.HOURLY);
-        }
-        if (doesUserChooseWeekly(studyCafePassType)) {
-            applyPass(studyCafePasses, StudyCafePassType.WEEKLY);
-        }
-        if (doesUserChooseFixed(studyCafePassType)) {
-            applyPass(studyCafePasses, StudyCafePassType.FIXED);
-        }
-    }
-
-    private void applyPass(final StudyCafePasses studyCafePasses, final StudyCafePassType studyCafePassType) {
-        StudyCafePasses passes = studyCafePasses.getStudyCafePassesByPassType(studyCafePassType);
-        outputHandler.showPassListForSelection(passes);
-        StudyCafePass selectedPass = inputHandler.getSelectPass(passes);
+        outputHandler.showPassListForSelection(availablePasses);
+        StudyCafePass selectedPass = inputHandler.getSelectPass(availablePasses);
         if (studyCafePassType == StudyCafePassType.FIXED) {
             checkLockerPass(selectedPass);
             return;
         }
         outputHandler.showPassOrderSummary(selectedPass, null);
+    }
+
+    private StudyCafePasses getAvailablePasses(final StudyCafePassType studyCafePassType) {
+        StudyCafePasses allPasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
+        StudyCafePassProcessor studyCafePassProcessor = new StudyCafePassProcessor();
+        return studyCafePassProcessor.filterPassesByType(studyCafePassType, allPasses);
     }
 
     private void checkLockerPass(final StudyCafePass selectedPass) {
@@ -75,18 +69,6 @@ public class StudyCafePassMachine {
             return;
         }
         outputHandler.showPassOrderSummary(selectedPass, null);
-    }
-
-    private boolean doesUserChooseHourly(final StudyCafePassType studyCafePassType) {
-        return studyCafePassType == StudyCafePassType.HOURLY;
-    }
-
-    private boolean doesUserChooseWeekly(final StudyCafePassType studyCafePassType) {
-        return studyCafePassType == StudyCafePassType.WEEKLY;
-    }
-
-    private boolean doesUserChooseFixed(final StudyCafePassType studyCafePassType) {
-        return studyCafePassType == StudyCafePassType.FIXED;
     }
 
 }
