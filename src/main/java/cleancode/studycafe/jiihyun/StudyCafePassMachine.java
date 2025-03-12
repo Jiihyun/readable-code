@@ -30,7 +30,7 @@ public class StudyCafePassMachine {
             outputHandler.showAnnouncement();
 
             outputHandler.askPassTypeSelection();
-            StudyCafePassType studyCafePassType = inputHandler.getPassTypeSelectingUserAction();
+            final StudyCafePassType studyCafePassType = inputHandler.getPassTypeSelectingUserAction();
             processUserSelection(studyCafePassType);
         } catch (AppException e) {
             outputHandler.showExceptionMessage(e);
@@ -40,10 +40,10 @@ public class StudyCafePassMachine {
     }
 
     private void processUserSelection(final StudyCafePassType studyCafePassType) {
-        StudyCafePasses availablePasses = getAvailablePasses(studyCafePassType);
+        final StudyCafePasses availablePasses = getAvailablePasses(studyCafePassType);
 
         outputHandler.showPassListForSelection(availablePasses);
-        StudyCafePass selectedPass = inputHandler.getSelectPass(availablePasses);
+        final StudyCafePass selectedPass = inputHandler.getSelectPass(availablePasses);
         if (studyCafePassType == StudyCafePassType.FIXED) {
             checkLockerPass(selectedPass);
             return;
@@ -52,17 +52,17 @@ public class StudyCafePassMachine {
     }
 
     private StudyCafePasses getAvailablePasses(final StudyCafePassType studyCafePassType) {
-        StudyCafePasses allPasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
-        StudyCafePassProcessor studyCafePassProcessor = new StudyCafePassProcessor();
+        final StudyCafePasses allPasses = new StudyCafePasses(studyCafeFileHandler.readStudyCafePasses());
+        final StudyCafePassProcessor studyCafePassProcessor = new StudyCafePassProcessor();
         return studyCafePassProcessor.filterPassesByType(studyCafePassType, allPasses);
     }
 
     private void checkLockerPass(final StudyCafePass selectedPass) {
-        StudyCafeLockerPasses lockerPasses = new StudyCafeLockerPasses(studyCafeFileHandler.readLockerPasses());
-        StudyCafeLockerPass lockerPass = lockerPasses.getLockerPassByCafePassTypeAndDuration(selectedPass);
+        final StudyCafeLockerPasses lockerPasses = new StudyCafeLockerPasses(studyCafeFileHandler.readLockerPasses());
+        final StudyCafeLockerPass lockerPass = lockerPasses.getLockerPassByCafePassTypeAndDuration(selectedPass);
 
         outputHandler.askLockerPass(lockerPass);
-        boolean lockerSelection = inputHandler.getLockerSelection();
+        final boolean lockerSelection = inputHandler.getLockerSelection();
 
         if (lockerSelection) {
             outputHandler.showPassOrderSummary(selectedPass, lockerPass);
