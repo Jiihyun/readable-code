@@ -2,6 +2,7 @@ package cleancode.studycafe.tobe;
 
 import cleancode.studycafe.tobe.exception.AppException;
 import cleancode.studycafe.tobe.io.StudyCafeIOHandler;
+import cleancode.studycafe.tobe.model.order.StudyCafePassOrder;
 import cleancode.studycafe.tobe.model.pass.StudyCafePassType;
 import cleancode.studycafe.tobe.model.pass.StudyCafeSeatPass;
 import cleancode.studycafe.tobe.model.pass.StudyCafeSeatPasses;
@@ -31,12 +32,12 @@ public class StudyCafePassMachine {
 
             StudyCafeSeatPass selectedPass = selectPass();
             Optional<StudyCafeLockerPass> optionalLockerPass = selectLockerPass(selectedPass);
-
-            optionalLockerPass.ifPresentOrElse(
-                    lockerPass -> studyCafeIOHandler.showPassOrderSummary(selectedPass, lockerPass),
-                    () -> studyCafeIOHandler.showPassOrderSummary(selectedPass)
+            StudyCafePassOrder passOrder = new StudyCafePassOrder(
+                    selectedPass,
+                    optionalLockerPass.orElse(null)
             );
 
+            studyCafeIOHandler.showPassOrderSummary(passOrder);
         } catch (AppException e) {
             studyCafeIOHandler.showSimpleMessage(e.getMessage());
         } catch (Exception e) {
@@ -53,7 +54,7 @@ public class StudyCafePassMachine {
     }
 
     private List<StudyCafeSeatPass> findPassCandidatesBy(final StudyCafePassType studyCafePassType) {
-        StudyCafeSeatPasses allPasses = studyCafeFileHandler.readStudyCafePasses();
+        StudyCafeSeatPasses allPasses = seatPassProvider.getSeatPasses();
         return allPasses.findPassBy(studyCafePassType);
     }
 
@@ -76,7 +77,7 @@ public class StudyCafePassMachine {
     }
 
     private Optional<StudyCafeLockerPass> findLockerPassCandidateBy(final StudyCafeSeatPass pass) {
-        StudyCafeLockerPasses allLockerPasses = studyCafeFileHandler.readLockerPasses();
+        StudyCafeLockerPasses allLockerPasses = lockerPassProvider.getLockerPasses();
         return allLockerPasses.findLockerPassBy(pass);
     }
 
