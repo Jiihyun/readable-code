@@ -59,7 +59,7 @@ public class StudyCafePassMachine {
     }
 
     private Optional<StudyCafeLockerPass> selectLockerPass(final StudyCafeSeatPass selectedPass) {
-        if (selectedPass.cannotUserLocker()) {
+        if (selectedPass.cannotUseLocker()) {
             return Optional.empty();
         }
 

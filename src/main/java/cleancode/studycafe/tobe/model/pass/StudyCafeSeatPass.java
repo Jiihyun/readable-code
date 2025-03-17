@@ -29,7 +29,7 @@ public class StudyCafeSeatPass implements StudyCafePass {
                 && lockerPass.isSamePassType(this.passType);
     }
 
-    public boolean cannotUserLocker() {
+    public boolean cannotUseLocker() {
         return this.passType.isNotLockerType();
     }
 
