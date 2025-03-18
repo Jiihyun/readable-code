@@ -16,7 +16,7 @@ class StudyCafeSeatPassTest {
             "HOURLY, WEEKLY, false"
     })
     @DisplayName("이용권 내 이용권 타입이 비교하는 타입과 같은지 비교할 수 있다.")
-    void testIsSamePassType(StudyCafePassType passType, StudyCafePassType expectedPassType, boolean expectedResult) {
+    void isSamePassType(StudyCafePassType passType, StudyCafePassType expectedPassType, boolean expectedResult) {
         // given
         StudyCafeSeatPass pass = StudyCafeSeatPass.of(passType, 2, 4000, 0.0);
         // when
